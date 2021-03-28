@@ -184,10 +184,10 @@ public class CubeMover : MonoBehaviour
                 moveCubes(rootCube.right, false, false, 1, 0, 90);
                 break;
             case "Rm_F":
-                moveCubes(rootCube.right, true, false, 1, 0, 90);
+                moveCubes(rootCube.right, true, false, -1, 0, -90);
                 break;
             case "Rm_B":
-                moveCubes(rootCube.right, true, false, -1, 0, -90);
+                moveCubes(rootCube.right, true, false, 1, 0, 90);
                 break;
             case "L_F":
                 moveCubes(-rootCube.right, false, false, 1, 0, -90);

@@ -7,9 +7,9 @@ public class ControlShuffle : MonoBehaviour
 {
     public Text shuffleText;
     public CubeMover cubemover;
+    public int stepsLeft;
 
     System.Random rnd;
-    int stepsLeft;
     int mode;
     List<string> modes;
     List<string> movingCodes;
