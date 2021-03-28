@@ -7,6 +7,10 @@ A fairly simple Rubik's Cube simulation program, implementing in C# in the Unity
 
 # Develop Log
 
+2021-03-29
+
+Adding basic formulas.
+
 2021-03-28
 
 Complete interface design and keyboard control mode.
