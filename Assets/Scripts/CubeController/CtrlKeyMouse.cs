@@ -6,6 +6,7 @@ public class CtrlKeyMouse : MonoBehaviour
 {
     public ControlMode cmode;
     public CubeMover cubemover;
+    public CanvasRaycastBlocker crb;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,7 @@ public class CtrlKeyMouse : MonoBehaviour
     {
         if (cmode.mode == 0) {
             // Check for mouse input
-            if (Input.GetMouseButtonDown(0)) {
+            if (Input.GetMouseButtonDown(0) && !crb.isHittingUI()) {
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 

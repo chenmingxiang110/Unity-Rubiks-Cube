@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ControlTimer : MonoBehaviour
 {
     public Text text;
+    public Toggle readyToggle;
 
     bool isRunning;
     float current_time;
@@ -22,6 +23,11 @@ public class ControlTimer : MonoBehaviour
             current_time += Time.deltaTime;
         }
         text.text = parseTime(current_time);
+
+        if (!readyToggle.isOn && Input.anyKeyDown) {
+            readyToggle.isOn = true;
+            isRunning = true;
+        }
     }
 
     string parseTime(float t) {
