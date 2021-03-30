@@ -15,7 +15,7 @@ public class TipsMover : MonoBehaviour
     {
         mode = 1; // 1: opening; 0: stay; -1: closing
         target_position = new Vector3(960, 540, 0);
-        destroy_position = new Vector3(960, -540, 0);
+        destroy_position = new Vector3(480, -540, 0);
     }
 
     // Update is called once per frame

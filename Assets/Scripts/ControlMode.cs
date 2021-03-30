@@ -39,13 +39,16 @@ public class ControlMode: MonoBehaviour
         }
     }
 
-    public void changeMode()
-    {
+    public void changeMode() {
         mode += 1;
         if (mode >= modes.Count)
         {
             mode = 0;
         }
         modeButton.GetComponentInChildren<Text>().text = modes[mode];
+    }
+
+    public void quitGame() {
+        Application.Quit();
     }
 }

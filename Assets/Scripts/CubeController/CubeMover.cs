@@ -1,23 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CubeMover : MonoBehaviour
 {
-    public float speed;
     public Transform centerCube;
     public Transform rootCube;
+    public Text text;
 
-    Vector3 orientation;
-    int target_dim;
-    float target_angle;
-
+    Vector3 rotation;
+    float rotation_sum;
+    int speedMode;
+    List<float> speeds;
     Transform root;
     bool shouldDestroy;
+
     // Start is called before the first frame update
     void Start()
     {
         root = null;
+        speedMode = 0;
+        speeds = new List<float>(new float[] { 1.0f, 2.0f, 5.0f, 10.0f, 20.0f, 50.0f, 100.0f });
+        rotation_sum = 0;
     }
 
     // Update is called once per frame
@@ -35,54 +40,36 @@ public class CubeMover : MonoBehaviour
                     shouldDestroy = false;
                 }
             } else {
-                root.Rotate(orientation);
-                if (target_dim == 0) {
-                    if (target_angle > 0 && normedAngle(root.eulerAngles.x) >= target_angle) {
-                        root.eulerAngles = new Vector3(target_angle, root.eulerAngles.y, root.eulerAngles.z);
-                        cleanRoot();
+                root.Rotate(rotation);
+                rotation_sum += rotation.magnitude;
+                if (rotation_sum >= 90) {
+                    rotation_sum = 0;
+                    if (rotation.x != 0) {
+                        if (rotation.x<0) {
+                            root.eulerAngles = new Vector3(-90, root.eulerAngles.y, root.eulerAngles.z);
+                        } else {
+                            root.eulerAngles = new Vector3(90, root.eulerAngles.y, root.eulerAngles.z);
+                        }
+                    } else if (rotation.y != 0) {
+                        if (rotation.y < 0) {
+                            root.eulerAngles = new Vector3(root.eulerAngles.x, -90, root.eulerAngles.z);
+                        } else {
+                            root.eulerAngles = new Vector3(root.eulerAngles.x, 90, root.eulerAngles.z);
+                        }
+                    } else {
+                        if (rotation.z < 0) {
+                            root.eulerAngles = new Vector3(root.eulerAngles.x, root.eulerAngles.y, -90);
+                        } else {
+                            root.eulerAngles = new Vector3(root.eulerAngles.x, root.eulerAngles.y, 90);
+                        }
                     }
-                    else if (target_angle < 0 && normedAngle(root.eulerAngles.x) <= target_angle) {
-                        root.eulerAngles = new Vector3(target_angle, root.eulerAngles.y, root.eulerAngles.z);
-                        cleanRoot();
-                    }
-
-                }
-                else if (target_dim == 1) {
-                    if (target_angle > 0 && normedAngle(root.eulerAngles.y) >= target_angle) {
-                        root.eulerAngles = new Vector3(root.eulerAngles.x, target_angle, root.eulerAngles.z);
-                        cleanRoot();
-                    }
-                    else if (target_angle < 0 && normedAngle(root.eulerAngles.y) <= target_angle) {
-                        root.eulerAngles = new Vector3(root.eulerAngles.x, target_angle, root.eulerAngles.z);
-                        cleanRoot();
-                    }
-
-                }
-                else if (target_dim == 2) {
-                    if (target_angle > 0 && normedAngle(root.eulerAngles.z) >= target_angle) {
-                        root.eulerAngles = new Vector3(root.eulerAngles.x, root.eulerAngles.y, target_angle);
-                        cleanRoot();
-                    }
-                    else if (target_angle < 0 && normedAngle(root.eulerAngles.z) <= target_angle) {
-                        root.eulerAngles = new Vector3(root.eulerAngles.x, root.eulerAngles.y, target_angle);
-                        cleanRoot();
-                    }
+                    cleanRoot();
                 }
             }
         }
     }
 
-    float normedAngle(float x) {
-        while (x>180) {
-            x = x - 360;
-        }
-        while (x<=-180) {
-            x = x + 360;
-        }
-        return x;
-    }
-
-    void moveCubes(Vector3 axis, bool is90Degree, bool isAll, int _orientation, int _target_dim, float _target_angle) {
+    void moveCubes(Vector3 axis, bool is90Degree, bool isAll, int _orientation) {
         if (isAvailable()) {
             List<Transform> ts = findCubesInFront(axis, is90Degree, isAll);
             GameObject emptyGO = new GameObject();
@@ -90,9 +77,7 @@ public class CubeMover : MonoBehaviour
             foreach (Transform t in ts) {
                 t.SetParent(root);
             }
-            orientation = axis * _orientation * speed;
-            target_dim = _target_dim;
-            target_angle = _target_angle;
+            rotation = axis * _orientation * speeds[speedMode];
         }
     }
 
@@ -131,6 +116,12 @@ public class CubeMover : MonoBehaviour
         return result;
     }
 
+    public void updateRotSpeedText() {
+        speedMode += 1;
+        if (speedMode >= speeds.Count) speedMode = 0;
+        text.text = "Rotation Speed: " + ((int)(speeds[speedMode] * 10)).ToString();
+    }
+
     public bool isAvailable() {
         if (root == null && shouldDestroy == false) {
             return true;
@@ -142,76 +133,76 @@ public class CubeMover : MonoBehaviour
     public void move(string code) {
         switch (code) {
             case "A_FL":
-                moveCubes(rootCube.forward, false, true, 1, 2, 90);
+                moveCubes(rootCube.forward, false, true, 1);
                 break;
             case "A_FR":
-                moveCubes(rootCube.forward, false, true, -1, 2, -90);
+                moveCubes(rootCube.forward, false, true, -1);
                 break;
             case "A_RF":
-                moveCubes(rootCube.right, false, true, -1, 0, -90);
+                moveCubes(rootCube.right, false, true, -1);
                 break;
             case "A_RB":
-                moveCubes(rootCube.right, false, true, 1, 0, 90);
+                moveCubes(rootCube.right, false, true, 1);
                 break;
             case "A_UR":
-                moveCubes(rootCube.up, false, true, -1, 1, -90);
+                moveCubes(rootCube.up, false, true, -1);
                 break;
             case "A_UL":
-                moveCubes(rootCube.up, false, true, 1, 1, 90);
+                moveCubes(rootCube.up, false, true, 1);
                 break;
             case "F_L":
-                moveCubes(-rootCube.forward, false, false, -1, 2, 90);
+                moveCubes(-rootCube.forward, false, false, -1);
                 break;
             case "F_R":
-                moveCubes(-rootCube.forward, false, false, 1, 2, -90);
+                moveCubes(-rootCube.forward, false, false, 1);
                 break;
             case "Fm_L":
-                moveCubes(-rootCube.forward, true, false, -1, 2, 90);
+                moveCubes(-rootCube.forward, true, false, -1);
                 break;
             case "Fm_R":
-                moveCubes(-rootCube.forward, true, false, 1, 2, -90);
+                moveCubes(-rootCube.forward, true, false, 1);
                 break;
             case "B_L":
-                moveCubes(rootCube.forward, false, false, 1, 2, 90);
+                moveCubes(rootCube.forward, false, false, 1);
                 break;
             case "B_R":
-                moveCubes(rootCube.forward, false, false, -1, 2, -90);
+                moveCubes(rootCube.forward, false, false, -1);
                 break;
             case "R_F":
-                moveCubes(rootCube.right, false, false, -1, 0, -90);
+                moveCubes(rootCube.right, false, false, -1);
                 break;
             case "R_B":
-                moveCubes(rootCube.right, false, false, 1, 0, 90);
+                moveCubes(rootCube.right, false, false, 1);
                 break;
             case "Rm_F":
-                moveCubes(rootCube.right, true, false, -1, 0, -90);
+                moveCubes(rootCube.right, true, false, -1);
                 break;
             case "Rm_B":
-                moveCubes(rootCube.right, true, false, 1, 0, 90);
+                moveCubes(rootCube.right, true, false, 1);
                 break;
             case "L_F":
-                moveCubes(-rootCube.right, false, false, 1, 0, -90);
+                moveCubes(-rootCube.right, false, false, 1);
                 break;
             case "L_B":
-                moveCubes(-rootCube.right, false, false, -1, 0, 90);
+                moveCubes(-rootCube.right, false, false, -1);
                 break;
             case "U_R":
-                moveCubes(rootCube.up, false, false, -1, 1, -90);
+                moveCubes(rootCube.up, false, false, -1);
                 break;
             case "U_L":
-                moveCubes(rootCube.up, false, false, 1, 1, 90);
+                moveCubes(rootCube.up, false, false, 1);
                 break;
             case "Um_R":
-                moveCubes(rootCube.up, true, false, -1, 1, -90);
+                moveCubes(rootCube.up, true, false, -1);
                 break;
             case "Um_L":
-                moveCubes(rootCube.up, true, false, 1, 1, 90);
+                moveCubes(rootCube.up, true, false, 1);
                 break;
             case "D_R":
-                moveCubes(-rootCube.up, false, false, 1, 1, -90);
+                moveCubes(-rootCube.up, false, false, 1);
                 break;
             case "D_L":
-                moveCubes(-rootCube.up, false, false, -1, 1, 90);
+                moveCubes(-rootCube.up, false, false, -1);
                 break;
         }
     }
