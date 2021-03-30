@@ -5,6 +5,12 @@ A fairly simple Rubik's Cube simulation program, implementing in C# in the Unity
 
 <img src="pics/Project-1.gif" width="600">
 
+If you are using Mac (Big Sur), please run the following command after download the latest release:
+
+``
+  sudo chmod -R 755 Path\ to\ app\ file.app
+``
+
 # Develop Log
 
 2021-03-29
