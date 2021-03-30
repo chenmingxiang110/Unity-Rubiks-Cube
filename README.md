@@ -8,7 +8,7 @@ A fairly simple Rubik's Cube simulation program, implementing in C# in the Unity
 If you are using Mac (Big Sur), please run the following command after download the latest release:
 
 ``
-  sudo chmod -R 755 Path\ to\ app\ file.app
+  sudo chmod -R 755 Path\to\app\file.app
 ``
 
 # Develop Log
