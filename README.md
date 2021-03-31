@@ -13,9 +13,15 @@ If you are using Mac (Big Sur), please run the following command after download 
 
 # Develop Log
 
+2021-03-30
+
+Add rotation speed control module.
+
+Add basic formula tutorials (unfinished).
+
 2021-03-29
 
-Adding basic formulas.
+Add basic formulas.
 
 2021-03-28
 
