@@ -27424,6 +27424,7 @@ GameObject:
   - component: {fileID: 1918664306}
   - component: {fileID: 1918664302}
   - component: {fileID: 1918664308}
+  - component: {fileID: 1918664309}
   m_Layer: 0
   m_Name: Commander
   m_TagString: Untagged
@@ -27535,6 +27536,8 @@ MonoBehaviour:
   centerCube: {fileID: 5307464270087173602}
   rootCube: {fileID: 1719758393}
   text: {fileID: 4090471087125793274}
+  cubeStatus: {fileID: 1918664309}
+  controlTimer: {fileID: 1918664300}
 --- !u!114 &1918664305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27600,6 +27603,19 @@ MonoBehaviour:
   tipTriL: {fileID: 5663575999915858360, guid: 45680559a81874a4688b9d36b65add3d, type: 3}
   tipTriR: {fileID: 1208105867992946657, guid: 522e652517a0bf4489a8c0cd68fc3e94, type: 3}
   tipQuad: {fileID: 8260828135085243682, guid: 9fbcf39627d7fe54cbe6e91a856c6b07, type: 3}
+--- !u!114 &1918664309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918664297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4326cacedf48e5b47a1229088a1d1c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RubiksCube: {fileID: 1719758393}
 --- !u!1 &1925843030
 GameObject:
   m_ObjectHideFlags: 0
@@ -31018,7 +31034,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Rotation Speed: 10'
+  m_Text: 'Rotation Speed: 16'
 --- !u!114 &4090471087125793278
 MonoBehaviour:
   m_ObjectHideFlags: 0
