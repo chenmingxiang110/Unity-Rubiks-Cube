@@ -8,6 +8,8 @@ public class CubeMover : MonoBehaviour
     public Transform centerCube;
     public Transform rootCube;
     public Text text;
+    public CubeStatus cubeStatus;
+    public ControlTimer controlTimer;
 
     Vector3 rotation;
     float rotation_sum;
@@ -20,8 +22,8 @@ public class CubeMover : MonoBehaviour
     void Start()
     {
         root = null;
-        speedMode = 0;
-        speeds = new List<float>(new float[] { 1.0f, 2.0f, 5.0f, 10.0f, 20.0f, 50.0f, 100.0f });
+        speedMode = 1;
+        speeds = new List<float>(new float[] { 0.8f, 1.6f, 3.2f, 6.4f, 12.8f, 25.6f, 51.2f });
         rotation_sum = 0;
     }
 
@@ -64,6 +66,12 @@ public class CubeMover : MonoBehaviour
                         }
                     }
                     cleanRoot();
+                    string status = cubeStatus.GetStatus();
+                    print(status);
+                    if (cubeStatus.isFinished(status) && !controlTimer.readyToggle.isOn) {
+                        controlTimer.readyToggle.isOn = true;
+                        controlTimer.stopTimer();
+                    }
                 }
             }
         }

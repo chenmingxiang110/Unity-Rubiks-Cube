@@ -24,8 +24,7 @@ public class ControlTimer : MonoBehaviour
         }
         text.text = parseTime(current_time);
 
-        if (!readyToggle.isOn && Input.anyKeyDown) {
-            readyToggle.isOn = true;
+        if (!readyToggle.isOn && Input.anyKeyDown && !isRunning) {
             isRunning = true;
         }
     }
@@ -52,6 +51,14 @@ public class ControlTimer : MonoBehaviour
         } else {
             isRunning = true;
         }
+    }
+
+    public void startTimer() {
+        isRunning = true;
+    }
+
+    public void stopTimer() {
+        isRunning = false;
     }
 
     public void clearTimer() {
