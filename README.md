@@ -13,6 +13,10 @@ If you are using Mac (Big Sur), please run the following command after download 
 
 # Develop Log
 
+2021-04-02
+
+Add "auto-start" and "auto-stop" to the timer.
+
 2021-03-30
 
 Add rotation speed control module.
