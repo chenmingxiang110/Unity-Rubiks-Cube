@@ -15,6 +15,10 @@ If you are using Mac (Big Sur), please run the following command after download 
 
 2021-04-02
 
+Add opening scene.
+
+2021-04-02
+
 Add "auto-start" and "auto-stop" to the timer.
 
 2021-03-30
