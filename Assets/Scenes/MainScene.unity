@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 6f1e6baf826e6654d8c92ec7d551e330, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3893,7 +3893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8349056, g: 0.9331962, b: 1, a: 1}
+  m_Color: {r: 0.92156863, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5248,7 +5248,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 353352052}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1918664310}
+        m_TargetAssemblyTypeName: MainSceneManager, Assembly-CSharp
+        m_MethodName: backToMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &353352052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10649,7 +10661,7 @@ GameObject:
   - component: {fileID: 782705565}
   - component: {fileID: 782705564}
   m_Layer: 5
-  m_Name: QuickFormulasTag
+  m_Name: QuickAlgoTag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12908,7 +12920,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quick Formulas
+  m_Text: Quick Algorithms
 --- !u!222 &915235426
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13543,13 +13555,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.2635933, y: -0.28104576, z: 0.08058856, w: 0.9192592}
+  m_LocalRotation: {x: 0.2649596, y: -0.2649596, z: 0.075975925, w: 0.9240241}
   m_LocalPosition: {x: 3.5, y: 3.5, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 32, y: -34, z: 0}
+  m_LocalEulerAnglesHint: {x: 32, y: -32, z: 0}
 --- !u!1 &964699692
 GameObject:
   m_ObjectHideFlags: 0
@@ -21496,8 +21508,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1918664298}
-        m_TargetAssemblyTypeName: ControlMode, Assembly-CSharp
+      - m_Target: {fileID: 1918664310}
+        m_TargetAssemblyTypeName: MainSceneManager, Assembly-CSharp
         m_MethodName: quitGame
         m_Mode: 1
         m_Arguments:
@@ -21625,11 +21637,23 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1536968748}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1918664311}
+        m_TargetAssemblyTypeName: CFOPmain, Assembly-CSharp
+        m_MethodName: toggleAuto
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1536968748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27425,6 +27449,8 @@ GameObject:
   - component: {fileID: 1918664302}
   - component: {fileID: 1918664308}
   - component: {fileID: 1918664309}
+  - component: {fileID: 1918664310}
+  - component: {fileID: 1918664311}
   m_Layer: 0
   m_Name: Commander
   m_TagString: Untagged
@@ -27538,6 +27564,7 @@ MonoBehaviour:
   text: {fileID: 4090471087125793274}
   cubeStatus: {fileID: 1918664309}
   controlTimer: {fileID: 1918664300}
+  isLocked: 0
 --- !u!114 &1918664305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27616,6 +27643,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RubiksCube: {fileID: 1719758393}
+--- !u!114 &1918664310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918664297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b9e79490bb94414d95b308a543e7feb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1918664311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918664297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e0365b97fe1fc4e96df40f8c0d2517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cubeStatus: {fileID: 1918664309}
+  isAuto: 0
+  cubemover: {fileID: 1918664304}
 --- !u!1 &1925843030
 GameObject:
   m_ObjectHideFlags: 0

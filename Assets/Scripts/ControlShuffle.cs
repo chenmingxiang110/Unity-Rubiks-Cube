@@ -40,12 +40,15 @@ public class ControlShuffle : MonoBehaviour
                 stepsLeft -= 1;
                 string code = movingCodes[rnd.Next(movingCodes.Count)];
                 cubemover.move(code);
+                if (stepsLeft == 0) {
+                    cubemover.isLocked = false;
+                }
             }
         }
     }
 
-        // Update is called once per frame
-        public void modeIncrease() {
+    // Update is called once per frame
+    public void modeIncrease() {
         mode += 1;
         if (mode >= modes.Count) {
             mode = 0;
@@ -62,16 +65,19 @@ public class ControlShuffle : MonoBehaviour
     }
 
     public void shuffleCube() {
-        switch (mode) {
-            case 0:
-                stepsLeft = 10;
-                break;
-            case 1:
-                stepsLeft = 20;
-                break;
-            case 2:
-                stepsLeft = 40;
-                break;
+        if (!cubemover.isLocked) {
+            cubemover.isLocked = true;
+            switch (mode) {
+                case 0:
+                    stepsLeft = 10;
+                    break;
+                case 1:
+                    stepsLeft = 20;
+                    break;
+                case 2:
+                    stepsLeft = 40;
+                    break;
+            }
         }
     }
 }

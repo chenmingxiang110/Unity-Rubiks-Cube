@@ -52,70 +52,93 @@ public class CubeFormulas : MonoBehaviour
             if (cubemover.isAvailable()) {
                 string code = current_formula[current_formula.Length-stepsLeft];
                 stepsLeft -= 1;
-                if (stepsLeft == 0) current_formula = null;
                 cubemover.move(code);
+                if (stepsLeft == 0) {
+                    cubemover.isLocked = false;
+                    current_formula = null;
+                }
             }
         }
     }
 
-    public void runFormula_2_L() {
-        if (stepsLeft<=0) {
-            current_formula = formula_2_L;
+    public void runFormula(List<string> my_formula) {
+        if (stepsLeft <= 0 && !cubemover.isLocked) {
+            cubemover.isLocked = true;
+            current_formula = my_formula.ToArray();
             stepsLeft = current_formula.Length;
         }
     }
 
+    public void runFormula_2_L() {
+        if (stepsLeft <= 0 && !cubemover.isLocked) {
+            cubemover.isLocked = true;
+            current_formula = formula_2_L;
+            stepsLeft = current_formula.Length;
+            if (stepsLeft == 0) {
+                cubemover.isLocked = false;
+            }
+        }
+    }
+
     public void runFormula_2_R() {
-        if (stepsLeft <= 0) {
+        if (stepsLeft <= 0 && !cubemover.isLocked) {
+            cubemover.isLocked = true;
             current_formula = formula_2_R;
             stepsLeft = current_formula.Length;
         }
     }
 
     public void runFormula_3_cross_L() {
-        if (stepsLeft <= 0) {
+        if (stepsLeft <= 0 && !cubemover.isLocked) {
+            cubemover.isLocked = true;
             current_formula = formula_3_cross_L;
             stepsLeft = current_formula.Length;
         }
     }
 
     public void runFormula_3_fish_L() {
-        if (stepsLeft <= 0) {
+        if (stepsLeft <= 0 && !cubemover.isLocked) {
+            cubemover.isLocked = true;
             current_formula = formula_3_fish_L;
             stepsLeft = current_formula.Length;
         }
     }
 
     public void runFormula_3_fish_R() {
-        if (stepsLeft <= 0) {
+        if (stepsLeft <= 0 && !cubemover.isLocked) {
+            cubemover.isLocked = true;
             current_formula = formula_3_fish_R;
             stepsLeft = current_formula.Length;
         }
     }
 
     public void runFormula_3_corner() {
-        if (stepsLeft <= 0) {
+        if (stepsLeft <= 0 && !cubemover.isLocked) {
+            cubemover.isLocked = true;
             current_formula = formula_3_corner;
             stepsLeft = current_formula.Length;
         }
     }
 
     public void runFormula_3_triple_L() {
-        if (stepsLeft <= 0) {
+        if (stepsLeft <= 0 && !cubemover.isLocked) {
+            cubemover.isLocked = true;
             current_formula = formula_3_triple_L;
             stepsLeft = current_formula.Length;
         }
     }
 
     public void runFormula_3_triple_R() {
-        if (stepsLeft <= 0) {
+        if (stepsLeft <= 0 && !cubemover.isLocked) {
+            cubemover.isLocked = true;
             current_formula = formula_3_triple_R;
             stepsLeft = current_formula.Length;
         }
     }
 
     public void runFormula_3_quadruple() {
-        if (stepsLeft <= 0) {
+        if (stepsLeft <= 0 && !cubemover.isLocked) {
+            cubemover.isLocked = true;
             current_formula = formula_3_quadruple;
             stepsLeft = current_formula.Length;
         }

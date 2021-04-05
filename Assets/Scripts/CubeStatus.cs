@@ -30,6 +30,34 @@ public class CubeStatus : MonoBehaviour
     }
 
     public string GetStatus() {
+        /** prepare scrambledCube as
+         *
+         *             |************|
+         *             |*U1**U2**U3*|
+         *             |************|
+         *             |*U4**U5**U6*|
+         *             |************|
+         *             |*U7**U8**U9*|
+         *             |************|
+         * ************|************|************|************|
+         * *L1**L2**L3*|*F1**F2**F3*|*R1**R2**R3*|*B1**B2**B3*|
+         * ************|************|************|************|
+         * *L4**L5**L6*|*F4**F5**F6*|*R4**R5**R6*|*B4**B5**B6*|
+         * ************|************|************|************|
+         * *L7**L8**L9*|*F7**F8**F9*|*R7**R8**R9*|*B7**B8**B9*|
+         * ************|************|************|************|
+         *             |************|
+         *             |*D1**D2**D3*|
+         *             |************|
+         *             |*D4**D5**D6*|
+         *             |************|
+         *             |*D7**D8**D9*|
+         *             |************|
+         *
+         * -> 00 01 ... 08 09 ... 17 18 ... 26 27 ... 35 36 ... 44 45 ... 53
+         * -> U1 U2 ... U9 R1 ... R9 F1 ... F9 D1 ... D9 L1 ... L9 B1 ... B9
+         */
+
         char[] theArray = new char[54];
         
         // right -> left, up -> down, front -> back
@@ -37,45 +65,6 @@ public class CubeStatus : MonoBehaviour
             // real values should be 1.05 and 1.55, here we use 0.75 and 1.35 for stability
             if (face.position.x > 1.35) {
                 // right
-                if (face.position.y > 0.75) {
-                    // up
-                    if (face.position.z < -0.75) {
-                        // front
-                        theArray[0] = face.GetComponent<Renderer>().material.name[0];
-                    } else if (face.position.z > 0.75) {
-                        // back
-                        theArray[2] = face.GetComponent<Renderer>().material.name[0];
-                    } else {
-                        //mid
-                        theArray[1] = face.GetComponent<Renderer>().material.name[0];
-                    }
-                } else if (face.position.y < -0.75) {
-                    // down
-                    if (face.position.z < -0.75) {
-                        // front
-                        theArray[6] = face.GetComponent<Renderer>().material.name[0];
-                    } else if (face.position.z > 0.75) {
-                        // back
-                        theArray[8] = face.GetComponent<Renderer>().material.name[0];
-                    } else {
-                        //mid
-                        theArray[7] = face.GetComponent<Renderer>().material.name[0];
-                    }
-                } else {
-                    // mid
-                    if (face.position.z < -0.75) {
-                        // front
-                        theArray[3] = face.GetComponent<Renderer>().material.name[0];
-                    } else if (face.position.z > 0.75) {
-                        // back
-                        theArray[5] = face.GetComponent<Renderer>().material.name[0];
-                    } else {
-                        //mid
-                        theArray[4] = face.GetComponent<Renderer>().material.name[0];
-                    }
-                }
-            } else if (face.position.x < -1.35) {
-                // left
                 if (face.position.y > 0.75) {
                     // up
                     if (face.position.z < -0.75) {
@@ -113,43 +102,82 @@ public class CubeStatus : MonoBehaviour
                         theArray[13] = face.GetComponent<Renderer>().material.name[0];
                     }
                 }
+            } else if (face.position.x < -1.35) {
+                // left
+                if (face.position.y > 0.75) {
+                    // up
+                    if (face.position.z < -0.75) {
+                        // front
+                        theArray[38] = face.GetComponent<Renderer>().material.name[0];
+                    } else if (face.position.z > 0.75) {
+                        // back
+                        theArray[36] = face.GetComponent<Renderer>().material.name[0];
+                    } else {
+                        //mid
+                        theArray[37] = face.GetComponent<Renderer>().material.name[0];
+                    }
+                } else if (face.position.y < -0.75) {
+                    // down
+                    if (face.position.z < -0.75) {
+                        // front
+                        theArray[44] = face.GetComponent<Renderer>().material.name[0];
+                    } else if (face.position.z > 0.75) {
+                        // back
+                        theArray[42] = face.GetComponent<Renderer>().material.name[0];
+                    } else {
+                        //mid
+                        theArray[43] = face.GetComponent<Renderer>().material.name[0];
+                    }
+                } else {
+                    // mid
+                    if (face.position.z < -0.75) {
+                        // front
+                        theArray[41] = face.GetComponent<Renderer>().material.name[0];
+                    } else if (face.position.z > 0.75) {
+                        // back
+                        theArray[39] = face.GetComponent<Renderer>().material.name[0];
+                    } else {
+                        //mid
+                        theArray[40] = face.GetComponent<Renderer>().material.name[0];
+                    }
+                }
             } else if (face.position.y > 1.35) {
                 // up
                 if (face.position.x > 0.75) {
                     // right
                     if (face.position.z < -0.75) {
                         // front
-                        theArray[18] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[8] = face.GetComponent<Renderer>().material.name[0];
                     } else if (face.position.z > 0.75) {
                         // back
-                        theArray[20] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[2] = face.GetComponent<Renderer>().material.name[0];
                     } else {
                         //mid
-                        theArray[19] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[5] = face.GetComponent<Renderer>().material.name[0];
                     }
                 } else if (face.position.x < -0.75) {
                     // left
                     if (face.position.z < -0.75) {
                         // front
-                        theArray[24] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[6] = face.GetComponent<Renderer>().material.name[0];
                     } else if (face.position.z > 0.75) {
                         // back
-                        theArray[26] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[0] = face.GetComponent<Renderer>().material.name[0];
                     } else {
                         //mid
-                        theArray[25] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[3] = face.GetComponent<Renderer>().material.name[0];
                     }
                 } else {
                     // mid
                     if (face.position.z < -0.75) {
                         // front
-                        theArray[21] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[7] = face.GetComponent<Renderer>().material.name[0];
                     } else if (face.position.z > 0.75) {
                         // back
-                        theArray[23] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[1] = face.GetComponent<Renderer>().material.name[0];
                     } else {
                         //mid
-                        theArray[22] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[4] = face.GetComponent<Renderer>().material.name[0];
                     }
                 }
             } else if (face.position.y < -1.35) {
@@ -158,34 +186,34 @@ public class CubeStatus : MonoBehaviour
                     // right
                     if (face.position.z < -0.75) {
                         // front
-                        theArray[27] = face.GetComponent<Renderer>().material.name[0];
-                    } else if (face.position.z > 0.75) {
-                        // back
                         theArray[29] = face.GetComponent<Renderer>().material.name[0];
-                    } else {
-                        //mid
-                        theArray[28] = face.GetComponent<Renderer>().material.name[0];
-                    }
-                } else if (face.position.x < -0.75) {
-                    // left
-                    if (face.position.z < -0.75) {
-                        // front
-                        theArray[33] = face.GetComponent<Renderer>().material.name[0];
                     } else if (face.position.z > 0.75) {
                         // back
                         theArray[35] = face.GetComponent<Renderer>().material.name[0];
                     } else {
                         //mid
-                        theArray[34] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[32] = face.GetComponent<Renderer>().material.name[0];
+                    }
+                } else if (face.position.x < -0.75) {
+                    // left
+                    if (face.position.z < -0.75) {
+                        // front
+                        theArray[27] = face.GetComponent<Renderer>().material.name[0];
+                    } else if (face.position.z > 0.75) {
+                        // back
+                        theArray[33] = face.GetComponent<Renderer>().material.name[0];
+                    } else {
+                        //mid
+                        theArray[30] = face.GetComponent<Renderer>().material.name[0];
                     }
                 } else {
                     // mid
                     if (face.position.z < -0.75) {
                         // front
-                        theArray[30] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[28] = face.GetComponent<Renderer>().material.name[0];
                     } else if (face.position.z > 0.75) {
                         // back
-                        theArray[32] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[34] = face.GetComponent<Renderer>().material.name[0];
                     } else {
                         //mid
                         theArray[31] = face.GetComponent<Renderer>().material.name[0];
@@ -197,37 +225,37 @@ public class CubeStatus : MonoBehaviour
                     // right
                     if (face.position.y > 0.75) {
                         // up
-                        theArray[36] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[20] = face.GetComponent<Renderer>().material.name[0];
                     } else if (face.position.y < -0.75) {
                         // down
-                        theArray[38] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[26] = face.GetComponent<Renderer>().material.name[0];
                     } else {
                         //mid
-                        theArray[37] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[23] = face.GetComponent<Renderer>().material.name[0];
                     }
                 } else if (face.position.x < -0.75) {
                     // left
                     if (face.position.y > 0.75) {
                         // up
-                        theArray[42] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[18] = face.GetComponent<Renderer>().material.name[0];
                     } else if (face.position.y < -0.75) {
                         // down
-                        theArray[44] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[24] = face.GetComponent<Renderer>().material.name[0];
                     } else {
                         //mid
-                        theArray[43] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[21] = face.GetComponent<Renderer>().material.name[0];
                     }
                 } else {
                     // mid
                     if (face.position.y > 0.75) {
                         // up
-                        theArray[39] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[19] = face.GetComponent<Renderer>().material.name[0];
                     } else if (face.position.y < -0.75) {
                         // down
-                        theArray[41] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[25] = face.GetComponent<Renderer>().material.name[0];
                     } else {
                         //mid
-                        theArray[40] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[22] = face.GetComponent<Renderer>().material.name[0];
                     }
                 }
             } else if (face.position.z > 1.35) {
@@ -239,31 +267,31 @@ public class CubeStatus : MonoBehaviour
                         theArray[45] = face.GetComponent<Renderer>().material.name[0];
                     } else if (face.position.y < -0.75) {
                         // down
-                        theArray[47] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[51] = face.GetComponent<Renderer>().material.name[0];
                     } else {
                         //mid
-                        theArray[46] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[48] = face.GetComponent<Renderer>().material.name[0];
                     }
                 } else if (face.position.x < -0.75) {
                     // left
                     if (face.position.y > 0.75) {
                         // up
-                        theArray[51] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[47] = face.GetComponent<Renderer>().material.name[0];
                     } else if (face.position.y < -0.75) {
                         // down
                         theArray[53] = face.GetComponent<Renderer>().material.name[0];
                     } else {
                         //mid
-                        theArray[52] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[50] = face.GetComponent<Renderer>().material.name[0];
                     }
                 } else {
                     // mid
                     if (face.position.y > 0.75) {
                         // up
-                        theArray[48] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[46] = face.GetComponent<Renderer>().material.name[0];
                     } else if (face.position.y < -0.75) {
                         // down
-                        theArray[50] = face.GetComponent<Renderer>().material.name[0];
+                        theArray[52] = face.GetComponent<Renderer>().material.name[0];
                     } else {
                         //mid
                         theArray[49] = face.GetComponent<Renderer>().material.name[0];

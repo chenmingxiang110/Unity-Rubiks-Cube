@@ -47,8 +47,4 @@ public class ControlMode: MonoBehaviour
         }
         modeButton.GetComponentInChildren<Text>().text = modes[mode];
     }
-
-    public void quitGame() {
-        Application.Quit();
-    }
 }
