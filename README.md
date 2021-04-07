@@ -13,7 +13,11 @@ If you are using Mac (Big Sur), please run the following command after download 
 
 # Develop Log
 
-2021-04-02
+2021-04-07
+
+Implement a clumsy auto-complete algorithm based on CFOP.
+
+2021-04-03
 
 Add opening scene.
 
