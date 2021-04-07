@@ -15,17 +15,24 @@ public class ControlFormulaTips : MonoBehaviour
     public Transform tipTriL;
     public Transform tipTriR;
     public Transform tipQuad;
+    public Transform CustomAlgoBble;
+
+    Animator CustomAlgoBbleAnim;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        CustomAlgoBbleAnim = CustomAlgoBble.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void toggleCustomFormula() {
+        CustomAlgoBbleAnim.SetBool("isOpen", !CustomAlgoBbleAnim.GetBool("isOpen"));
     }
 
     public void callOutFormulaTips() {

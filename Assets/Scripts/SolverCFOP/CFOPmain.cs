@@ -11,12 +11,24 @@ public class CFOPmain : MonoBehaviour
     List<string> current_moves;
     int stepsLeft;
 
+    SolverPLL solverPLL;
+    SolverOLL solverOLL;
+    SolverF2L solverF2L;
+    SolverF1L solverF1L;
+    SolverCross solverCross;
+
     // Start is called before the first frame update
     void Start()
     {
         isAuto = false;
         current_moves = new List<string>();
         stepsLeft = 0;
+
+        solverPLL = new SolverPLL();
+        solverOLL = new SolverOLL();
+        solverF2L = new SolverF2L();
+        solverF1L = new SolverF1L();
+        solverCross = new SolverCross();
     }
 
     // Update is called once per frame
@@ -25,8 +37,10 @@ public class CFOPmain : MonoBehaviour
         if (isAuto) {
             if (stepsLeft > 0) {
                 string code = current_moves[current_moves.Count - stepsLeft];
-                stepsLeft -= 1;
-                cubemover.move(code);
+                if (cubemover.isAvailable()) {
+                    stepsLeft -= 1;
+                    cubemover.move(code);
+                }
             } else {
                 Solve();
             }
@@ -35,19 +49,30 @@ public class CFOPmain : MonoBehaviour
 
     public void Solve() {
         if (cubemover.isAvailable()) {
+            string status = cubeStatus.GetStatus();
             // Lock the mover, and unlock when finished
-            switch (findCurrentStage()) {
+            string stage = findCurrentStage(status);
+            //print(stage);
+            switch (stage) {
                 case "Cross":
-                    toggleAuto();
+                    current_moves = solverCross.Solve(status);
+                    stepsLeft = current_moves.Count;
+                    break;
+                case "F1L":
+                    current_moves = solverF1L.Solve(status);
+                    stepsLeft = current_moves.Count;
                     break;
                 case "F2L":
-                    toggleAuto();
+                    current_moves = solverF2L.Solve(status);
+                    stepsLeft = current_moves.Count;
                     break;
                 case "OLL":
-                    toggleAuto();
+                    current_moves = solverOLL.Solve(status);
+                    stepsLeft = current_moves.Count;
                     break;
                 case "PLL":
-                    toggleAuto();
+                    current_moves = solverPLL.Solve(status);
+                    stepsLeft = current_moves.Count;
                     break;
                 case "Finished":
                     toggleAuto();
@@ -80,12 +105,28 @@ public class CFOPmain : MonoBehaviour
         return false;
     }
 
-    bool hasF2L(string status) {
-        for (int i = 28; i<36; i++) {
-            if (status[i]!=status[27]) {
+    bool hasF1L(string status) {
+        for (int i = 28; i < 36; i++) {
+            if (status[i] != status[27]) {
                 return false;
             }
         }
+        if (status[13] != status[16]) {
+            return false;
+        }
+        if (status[22] != status[25]) {
+            return false;
+        }
+        if (status[40] != status[43]) {
+            return false;
+        }
+        if (status[49] != status[52]) {
+            return false;
+        }
+        return true;
+    }
+
+    bool hasF2L(string status) {
         for (int i = 13; i < 18; i++) {
             if (status[i] != status[12]) {
                 return false;
@@ -118,19 +159,21 @@ public class CFOPmain : MonoBehaviour
         return true;
     }
 
-    public string findCurrentStage() {
-        string status = cubeStatus.GetStatus();
+    public string findCurrentStage(string status) {
         if (cubeStatus.isFinished(status)) {
             return "Finished";
         } else {
             if (hasCross(status)) {
-                if (hasF2L(status)) {
-                    if (hasTop(status)) {
-                        return "PLL";
+                if (hasF1L(status)) {
+                    if (hasF2L(status)) {
+                        if (hasTop(status)) {
+                            return "PLL";
+                        }
+                        return "OLL";
                     }
-                    return "OLL";
+                    return "F2L";
                 }
-                return "F2L";
+                return "F1L";
             }
             return "Cross";
         }

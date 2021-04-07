@@ -6,17 +6,20 @@ public class CtrlKeyboard : MonoBehaviour
 {
     public ControlMode cmode;
     public CubeMover cubemover;
+    public Transform CustomAlgoBble;
+
+    Animator CustomAlgoBbleAnim;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        CustomAlgoBbleAnim = CustomAlgoBble.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (cmode.mode==1) {
+        if (cmode.mode == 1 && !CustomAlgoBbleAnim.GetBool("isOpen")) {
             if (Input.GetKeyDown(KeyCode.A)) {
                 if (Input.GetKey(KeyCode.I)) {
                     cubemover.move("U_L");

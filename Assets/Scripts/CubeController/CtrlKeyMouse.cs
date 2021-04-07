@@ -7,17 +7,20 @@ public class CtrlKeyMouse : MonoBehaviour
     public ControlMode cmode;
     public CubeMover cubemover;
     public CanvasRaycastBlocker crb;
+    public Transform CustomAlgoBble;
+
+    Animator CustomAlgoBbleAnim;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        CustomAlgoBbleAnim = CustomAlgoBble.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (cmode.mode == 0) {
+        if (cmode.mode == 0 && !CustomAlgoBbleAnim.GetBool("isOpen")) {
             // Check for mouse input
             if (Input.GetMouseButtonDown(0) && !crb.isHittingUI()) {
                 RaycastHit hit;
