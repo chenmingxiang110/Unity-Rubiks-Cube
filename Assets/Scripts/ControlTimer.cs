@@ -24,7 +24,7 @@ public class ControlTimer : MonoBehaviour
         }
         text.text = parseTime(current_time);
 
-        if (!readyToggle.isOn && Input.anyKeyDown && !isRunning) {
+        if (!readyToggle.isOn && Input.anyKeyDown && !isRunning && current_time==0) {
             isRunning = true;
         }
     }

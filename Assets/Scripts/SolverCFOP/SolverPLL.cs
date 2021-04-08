@@ -27,8 +27,8 @@ public class SolverPLL
     List<string> formulaZ;
 
     public SolverPLL() {
-        formulaAa = Translator.translate("x L2 D2 L_ U_ L D2 L_ U L_ F x_");
-        formulaAb = Translator.translate("x_ L2 D2 L U L_ D2 L U_ L F_ x");
+        formulaAa = Translator.translate("D_ x L2 D2 L_ U_ L D2 L_ U L_ F");
+        formulaAb = Translator.translate("x_ L2 D2 L U L_ D2 L U_ L F2");
         formulaE = Translator.translate("x_ L_ U L D_ L_ U_ L D L_ U_ L D_ L_ U L D");
         formulaF = Translator.translate("R_ U_ F_ R U R_ U_ R_ F R2 U_ R_ U_ R U R_ U R");
         formulaGa = Translator.translate("R2 U R_ U R_ U_ R U_ R2 U_ D R_ U R D_");
@@ -37,7 +37,7 @@ public class SolverPLL
         formulaGd = Translator.translate("R U R_ U_ D R2 U_ R U_ R_ U R_ U R2 D_");
         formulaH = Translator.translate("M2 U M2 U2 M2 U M2");
         formulaJa = Translator.translate("x R2 F R F_ R U2 r_ U r U2");
-        formulaJb = Translator.translate("R U R_ F_ R U R_ U_ R_ F R2 U_ R_");
+        formulaJb = Translator.translate("R U R_ F_ R U R_ U_ R_ F R2 U_ R_ U_");
         formulaNa = Translator.translate("R U R_ U R U R_ F_ R U R_ U_ R_ F R2 U_ R_ U2 R U_ R_");
         formulaNb = Translator.translate("R_ U R U_ R_ F_ U_ F R U R_ F R_ F_ R U_ R");
         formulaRa = Translator.translate("R U_ R_ U_ R U R D R_ U_ R D_ R_ U2 R_");
@@ -47,7 +47,7 @@ public class SolverPLL
         formulaUb = Translator.translate("M2 U_ M U2 M_ U_ M2");
         formulaV = Translator.translate("R_ U R_ U_ y R_ F_ R2 U_ R_ U R_ F R F");
         formulaY = Translator.translate("F R U_ R_ U_ R U R_ F_ R U R_ U_ R_ F R F_");
-        formulaZ = Translator.translate("M_ U M2 U M2 U M_ U2 M2");
+        formulaZ = Translator.translate("M_ U M2 U M2 U M_ U2 M2 U_");
     }
 
     public List<string> Solve(string status) {
