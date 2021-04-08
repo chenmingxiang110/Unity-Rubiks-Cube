@@ -34,7 +34,6 @@ public class CustomAlgorithm : MonoBehaviour
                 string code = current_formula[current_formula.Length - stepsLeft];
                 stepsLeft -= 1;
                 cubemover.move(code);
-                print(code + "," + stepsLeft);
                 if (stepsLeft <= 0) {
                     cubemover.isLocked = false;
                     current_formula = null;
@@ -48,9 +47,19 @@ public class CustomAlgorithm : MonoBehaviour
     }
 
     public void revInput() {
-        string[] moves = inputField.text.Split(' ');
-        System.Array.Reverse(moves);
-        inputField.text = string.Join(" ", moves);
+        string[] moves = inputField.text.Trim().Split(' ');
+        string[] moves_ = new string[moves.Length];
+        for (int i = 0; i<moves.Length; i++) {
+            string m = moves[moves.Length - 1 - i];
+            if (m[m.Length - 1] == '_' || m[m.Length - 1] == '\'') {
+                moves_[i] = m.Substring(0, m.Length - 1);
+            } else if (m[m.Length - 1] == '2') {
+                moves_[i] = m;
+            } else {
+                moves_[i] = m+"\'";
+            }
+        }
+        inputField.text = string.Join(" ", moves_);
         return;
     }
 
