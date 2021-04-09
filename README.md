@@ -13,6 +13,10 @@ Please run the following command after download the latest release:
 
 # Develop Log
 
+[2021-04-10] Add some sound effects.
+
+[2021-04-09] Update images of algorithms.
+
 [2021-04-07] Implement a clumsy auto-complete algorithm based on CFOP.
 
 [2021-04-07] Add "custom algorithm" function. Now you can type the algorithm (e.g. R U R' U') and let the cube to operate by itself.
