@@ -21,7 +21,7 @@ public class ControlMode: MonoBehaviour
         modes.Add("Keyboard + Mouse");
         modes.Add("Keyboard");
         
-        if (mode==0) {
+        if (mode==0 && !cubemover.isLocked) {
             rubiksArrows.gameObject.SetActive(true);
         } else {
             rubiksArrows.gameObject.SetActive(false);
@@ -31,7 +31,10 @@ public class ControlMode: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (mode == 0 && cubemover.isAvailable() && controlShuffle.stepsLeft<=0 && cubeFormulas.stepsLeft <= 0) {
+        if (mode == 0 && cubemover.isAvailable() &&
+            controlShuffle.stepsLeft<=0 &&
+            cubeFormulas.stepsLeft <= 0 &&
+            !cubemover.isLocked) {
             rubiksArrows.gameObject.SetActive(true);
         }
         else {

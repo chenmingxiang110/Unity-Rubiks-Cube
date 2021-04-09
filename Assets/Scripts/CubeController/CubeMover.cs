@@ -11,7 +11,10 @@ public class CubeMover : MonoBehaviour
     public CubeStatus cubeStatus;
     public ControlTimer controlTimer;
     public bool isLocked;
+    public AudioClip audioFinished;
+    public AudioClip[] audioRot;
 
+    AudioSource audioSource;
     Vector3 rotation;
     float rotation_sum;
     int speedMode;
@@ -26,6 +29,8 @@ public class CubeMover : MonoBehaviour
         speedMode = 2;
         speeds = new List<float>(new float[] { 0.8f, 1.6f, 3.2f, 6.4f, 12.8f, 25.6f, 51.2f });
         rotation_sum = 0;
+        audioSource = transform.GetComponent<AudioSource>();
+        audioSource.loop = false; // for audio looping
     }
 
     // Update is called once per frame
@@ -69,9 +74,14 @@ public class CubeMover : MonoBehaviour
                     cleanRoot();
                     string status = cubeStatus.GetStatus();
                     //print(status);
-                    if (cubeStatus.isFinished(status) && !controlTimer.readyToggle.isOn) {
-                        controlTimer.readyToggle.isOn = true;
-                        controlTimer.stopTimer();
+                    if (cubeStatus.isFinished(status)) {
+                        if (!controlTimer.readyToggle.isOn) {
+                            controlTimer.readyToggle.isOn = true;
+                            controlTimer.stopTimer();
+                            audioSource.clip = audioFinished;
+                            audioSource.volume = 1.0f;
+                            audioSource.Play();
+                        }
                     }
                 }
             }
@@ -80,6 +90,9 @@ public class CubeMover : MonoBehaviour
 
     void moveCubes(Vector3 axis, bool is90Degree, bool isAll, int _orientation) {
         if (isAvailable()) {
+            audioSource.clip = audioRot[Random.Range(0, audioRot.Length)];
+            audioSource.volume = 0.25f;
+            audioSource.Play();
             List<Transform> ts = findCubesInFront(axis, is90Degree, isAll);
             GameObject emptyGO = new GameObject();
             root = emptyGO.transform;
