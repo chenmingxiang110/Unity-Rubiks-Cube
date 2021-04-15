@@ -5,7 +5,13 @@
 
 <img src="../pics/Project-1.gif" width="600">
 
-Mac 用户请在下载后运行以下代码，否则可能由于安全设置导致程序无法运行。（将代码中的 Path\to\app\file.app 替换为程序的路径，比如 ~/Desktop/MacBuild.app
+最新 Release 下载地址：
+
+Windows 用户：[点此下载](https://github.com/chenmingxiang110/Unity-Rubiks-Cube/releases/download/0.1.0/WindowsBuild.zip)
+
+Mac 用户：[点此下载](https://github.com/chenmingxiang110/Unity-Rubiks-Cube/releases/download/0.1.0/MacBuild.app.zip)
+
+Mac 用户请在下载后运行以下代码，否则可能由于安全设置导致程序无法运行。（将代码中的 Path\to\app\file.app 替换为程序的路径，比如 ~/Desktop/MacBuild.app）
 
 ``
   sudo chmod -R 755 Path\to\app\file.app
