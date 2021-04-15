@@ -5,4 +5,4 @@ A fairly simple Rubik's Cube simulation program, implementing in C# in the Unity
 
 English Readme [Click Here](https://github.com/chenmingxiang110/Unity-Rubiks-Cube/blob/main/EnglishReadme)
 
-中文说明 [Click Here](https://github.com/chenmingxiang110/Unity-Rubiks-Cube/tree/main/ChineseReadme)
+中文说明 [点击此处](https://github.com/chenmingxiang110/Unity-Rubiks-Cube/tree/main/ChineseReadme)
