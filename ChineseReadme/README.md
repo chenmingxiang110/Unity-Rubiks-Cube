@@ -1,11 +1,12 @@
 # Unity-Rubiks-Cube
+
 本项目提供了一套简单的魔方模拟程序。目前已经支持三阶魔方的鼠标/键盘操控，以及入门级自动求解程序。后续将提供更流畅快速的三阶魔方求解算法，以及内置教程等功能。
 
 <img src="../pics/screen_0.PNG" width="600">
 
 <img src="../pics/Project-1.gif" width="600">
 
-最新 Release 下载地址：
+# 最新 Release 下载地址：
 
 Windows 用户：[点此下载](https://github.com/chenmingxiang110/Unity-Rubiks-Cube/releases/download/0.1.0/WindowsBuild.zip)
 
