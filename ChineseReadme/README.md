@@ -1,11 +1,11 @@
 # Unity-Rubiks-Cube
-A fairly simple Rubik's Cube simulation program, implementing in C# in the Unity game engine.
+本项目提供了一套简单的魔方模拟程序。目前已经支持三阶魔方的鼠标/键盘操控，以及入门级自动求解程序。后续将提供更流畅快速的三阶魔方求解算法，以及内置教程等功能。
 
-<img src="pics/screen_0.PNG" width="600">
+<img src="../pics/screen_0.PNG" width="600">
 
-<img src="pics/Project-1.gif" width="600">
+<img src="../pics/Project-1.gif" width="600">
 
-Please run the following command after download the latest release:
+Mac 用户请在下载后运行以下代码，否则可能由于安全设置导致程序无法运行。（将代码中的 Path\to\app\file.app 替换为程序的路径，比如 ~/Desktop/MacBuild.app
 
 ``
   sudo chmod -R 755 Path\to\app\file.app
