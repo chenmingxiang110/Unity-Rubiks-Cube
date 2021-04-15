@@ -5,7 +5,7 @@ A fairly simple Rubik's Cube simulation program, implementing in C# in the Unity
 
 <img src="../pics/Project-1.gif" width="600">
 
-Please run the following command after download the latest release:
+For Mac users, please run the following command after download the latest release:
 
 ``
   sudo chmod -R 755 Path\to\app\file.app
